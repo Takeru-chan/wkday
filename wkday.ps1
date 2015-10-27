@@ -1,9 +1,9 @@
-﻿param($n)
+﻿param($n, $startdate)
 #-----------------------------------------------------------------------
 $credit = @"
-  wkday.ps1 ver.0.1  2015.10.27  (c)Takeru.
+  wkday.ps1 ver.0.2  2015.10.28  (c)Takeru.
 
-  Usage: wkday.ps1 n
+  Usage: wkday.ps1 n [yyyyMMdd]
 
   Description:
          The wkday utility counts calendar days and work days.
@@ -28,6 +28,9 @@ if (-Not ($n)) {
 }
 function wkday($day) {
   $today = Get-Date
+  if (($startdate)) {
+    $today = [DateTime]::ParseExact($startdate, "yyyyMMdd", $null)
+  }
   $hol = 0
   $week = @("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
   $dayoff = [System.Environment]::GetEnvironmentVariable("XCALWEEK").Split(",")

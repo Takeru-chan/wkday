@@ -2,8 +2,11 @@
 稼働日を数えるPowerShellスクリプトです。おまけで暦日も数えます。  
 
 ## Usage | 使い方
-引数に正の整数を指定すると、今日を起点に指定日数後の日付を表示します。
+引数に正の整数を指定すると、指定日を起点に指定日数後の日付を表示します。
+指定日を省略すると、今日を起点に計算します。
 休日設定をすることで、指定稼働日数後の日付がわかります。  
+
+wkday.ps1 n [yyyyMMdd]
 
 環境変数XCALWEEKに指定した曜日を休日と判定し、稼働日計数対象から外します。  
 日曜：0, 月曜：1, 火曜：2, ... 土曜：6
@@ -19,7 +22,7 @@ workday.lst / holiday.lstともに日付指定は１行あたり１日づつyyyy
 ```
 (*'-') >> Get-Date
 
-2015年10月27日 21:30:42
+2015年10月28日 8:07:42
 
 
 (*'-') >> [System.Environment]::GetEnvironmentVariable("XCALWEEK")
@@ -28,7 +31,7 @@ workday.lst / holiday.lstともに日付指定は１行あたり１日づつyyyy
 20151031
 (*'-') >> Get-Content holiday.lst
 20151103
-(*'-') >> .\wkday.ps1 14
+(*'-') >> .\wkday.ps1 14 20151027
 After 14 days is 2015/11/10(火) (calendar)
 After 14 days is 2015/11/16(月) (work day)
 ```
