@@ -9,20 +9,12 @@
 日曜：0, 月曜：1, 火曜：2, ... 土曜：6
 土日休みの例）XCALWEEK=0,6
 
-引数なしで起動するとクレジット表示をします。  
-
 休日指定曜日に対し個別にこれをキャンセルし、稼働日扱いにすることができます。
 カレントディレクトリ中のworkday.lstファイルに指定された日付は、休日指定曜日であっても稼働日計数対象になります。  
 
 また休日指定曜日以外の祝日はカレントディレクトリ中のholiday.lstファイルで日付指定することで、稼働日計数対象から外すことができます。  
 
 workday.lst / holiday.lstともに日付指定は１行あたり１日づつyyyymmdd形式で記載します。  
-
-workday.lstで10月31日の土曜日を稼働日指定する例  
-20151031  
-
-holiday.lstで11月3日の火曜日を祝日指定する例  
-20151103  
 
 ```
 (*'-') >> Get-Date
@@ -32,6 +24,10 @@ holiday.lstで11月3日の火曜日を祝日指定する例
 
 (*'-') >> [System.Environment]::GetEnvironmentVariable("XCALWEEK")
 0,6
+(*'-') >> Get-Content workday.lst
+20151031
+(*'-') >> Get-Content holiday.lst
+20151103
 (*'-') >> .\wkday.ps1 14
 After 14 days is 2015/11/10(火) (calendar)
 After 14 days is 2015/11/16(月) (work day)
@@ -41,5 +37,5 @@ After 14 days is 2015/11/16(月) (work day)
 ただし10月31日を稼働日設定としているため、実際に稼働日計数対象外は11月の1日(日),3日(火),7日(土),8日(日)の4日間となり、14稼働日後は11月16日となった。  
 
 ## License
-This script has released under the MIT license.
+This script has released under the MIT license.  
 [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT)
